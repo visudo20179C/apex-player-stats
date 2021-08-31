@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueTailwind from 'vue-tailwind'
+import settings from "./plugins/vue-tailwind/settings";
 import './main.css'
-
-const settings ={}
 
 Vue.use(VueTailwind, settings)
 
