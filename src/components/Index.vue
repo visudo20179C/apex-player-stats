@@ -1,8 +1,12 @@
 <template>
-  <div class="bg-black w-3/4 ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
+  <div class="bg-black w-full h-full ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
 	<h1 class="ml-auto mr-auto text-xl w-2/3 mb-5 border rounded-lg border-gray-500">Stats for: {{player}}</h1>
 	<div v-if="responseDataCompute != null">
-		<h1 class="text-xl">Account Level: {{this.responseData.global.level}} ({{this.responseData.global.toNextLevelPercent}}% until next level)</h1>
+		<h1 class="text-xl">Account Level: {{this.responseData.global.level}}</h1>
+		<div class="h-3 w-3/4 relative max-w-xl mr-auto ml-auto rounded-full overflow-hidden">
+    		<div class="w-full h-full bg-black border rounded-lg border-gray-500 absolute"></div>
+    		<div class="h-full bg-red-500 absolute" :style="barStyle"></div>
+		</div>
 		<h1 class="text-lg mt-4">{{this.responseData.global.rank.rankedSeason.replaceAll('_', ' ')}}</h1>
 		<table class="ml-auto mr-auto table-fixed w-3/4 divide-y divide-gray-200 border border-gray-500">
 			<tr class="border rounded-lg border-gray-500">
@@ -47,12 +51,26 @@
 			</t-select>
 		</div>
 	</div>
+	<div v-else>
+		<div class="w-full h-screen min-h-3/4 mt-1/3 bg-black">
+			<div class="text-lg">Loading... Please Wait... </div>
+			<half-circle-spinner
+			  :animation-duration="1000"
+			  :size="100"
+			  color="#B12322"
+			  class="mr-auto ml-auto"
+			/>
+		</div>
+	</div>	
   </div>
 </template>
 
 <script>
+import { HalfCircleSpinner } from 'epic-spinners'
+
 export default {
   	name: 'Index',
+	components: {HalfCircleSpinner},
 	data() {
 		return {
 			player: "visudo20179C",
@@ -65,7 +83,12 @@ export default {
 			return (this.responseData)
 				? this.responseData
 				: null
-		}
+		},
+		barStyle() {
+			return {
+				width: `${this.responseData.global.toNextLevelPercent}%`
+			}
+		},
 	},
 	methods: {
 		processData(data) {
