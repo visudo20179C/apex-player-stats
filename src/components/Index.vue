@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black w-full h-full ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
+  <div class="bg-black w-full h-screen ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
 	<h1 class="ml-auto mr-auto text-xl w-2/3 mb-5 border rounded-lg border-gray-500">Stats for: {{player}}</h1>
 	<div v-if="responseDataCompute != null">
 		<h1 class="text-xl">Account Level: {{this.responseData.global.level}}</h1>
@@ -42,13 +42,27 @@
 				</div>
 			</ul>
 		</div>
-		<div class="pb-10"> 
+		<div class="pb-5 bg-black"> 
 			<p class="mb-2"> See {{player}}'s trackers for: </p>
 			<t-select
-				placeholder="Select an option"
+				placeholder="Select a Legend"
+				v-model="selectedLegend"
 				:options="this.legendOptions"
-			>
-			</t-select>
+				@change="showLegendTrackers()"
+			/>
+		</div>
+		<div v-if="selectedLegend && selectedLegendData" class="bg-black pb-10">
+			<h1 class="text-xl">Trackers:</h1>
+			<div v-if="selectedLegendData.data !== undefined">
+				<ul>
+					<div v-for="item in selectedLegendData.data">
+						<li class="w-2/3 ml-auto mr-auto border border-gray-500">{{item.name}}: {{item.value}}</li>
+					</div>
+				</ul>
+			</div>
+			<div v-else>
+				None Equipped
+			</div>
 		</div>
 	</div>
 	<div v-else>
@@ -76,6 +90,8 @@ export default {
 			player: "visudo20179C",
 			responseData: null,
 			legendOptions: [],
+			selectedLegend: null,
+			selectedLegendData: null,
 		}
 	},
 	computed: {
@@ -97,8 +113,11 @@ export default {
 		},
 		setupLegendOptions() {
 			for(var elem in this.responseData.legends.all) {
-				this.legendOptions.push(elem)
+				this.legendOptions.push({value: elem, text: elem})
 			}
+		},
+		showLegendTrackers() {
+			this.selectedLegendData = this.responseData.legends.all[this.selectedLegend]
 		}
 	},
 	created() {
