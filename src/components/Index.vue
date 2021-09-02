@@ -1,10 +1,10 @@
 <template>
   <div class="bg-black w-full h-screen ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
 	<h1 class="ml-auto mr-auto text-xl w-2/3 mb-5 border rounded-lg border-gray-500">Stats for: {{player}}</h1>
-	<div v-if="responseDataCompute != null">
+	<div v-if="responseDataCompute != null" class="bg-black">
 		<h1 class="text-xl">Account Level: {{this.responseData.global.level}}</h1>
 		<div class="h-3 w-3/4 relative max-w-xl mr-auto ml-auto rounded-full overflow-hidden">
-    		<div class="w-full h-full bg-black border rounded-lg border-gray-500 absolute"></div>
+    		<div v-tooltip.top-center="nextLevelMessage" class="w-full h-full bg-black border rounded-lg border-gray-500 absolute"></div>
     		<div class="h-full bg-red-500 absolute" :style="barStyle"></div>
 		</div>
 		<h1 class="text-lg mt-4">{{this.responseData.global.rank.rankedSeason.replaceAll('_', ' ')}}</h1>
@@ -29,7 +29,7 @@
 				<td># {{this.responseData.global.rank.ladderPosPlatform}}</td>
 			</tr>
 		</table>
-		<div class="mt-4 mb-4 max-h-1/2">
+		<div class="mt-4 mb-4 max-h-1/2 bg-black">
 			<h1 class="text-xl">{{player}}'s currently selected legend: </h1>
 			<div class="ml-auto mr-auto mt-5 text-bold text-2xl w-64 h-10 bg-black border rounded-lg border-gray-500">
 				{{this.responseData.legends.selected.LegendName}}
@@ -66,25 +66,24 @@
 		</div>
 	</div>
 	<div v-else>
-		<div class="w-full h-screen min-h-3/4 mt-1/3 bg-black">
-			<div class="text-lg">Loading... Please Wait... </div>
-			<half-circle-spinner
-			  :animation-duration="1000"
-			  :size="100"
-			  color="#B12322"
-			  class="mr-auto ml-auto"
-			/>
-		</div>
+		<div class="text-lg">Loading... Please Wait... </div>
+		<half-circle-spinner
+		  :animation-duration="1000"
+		  :size="100"
+		  color="#B12322"
+		  class="m-auto"
+		/>
 	</div>	
   </div>
 </template>
 
 <script>
 import { HalfCircleSpinner } from 'epic-spinners'
+import { VTooltip } from 'v-tooltip'
 
 export default {
   	name: 'Index',
-	components: {HalfCircleSpinner},
+	components: {HalfCircleSpinner, VTooltip},
 	data() {
 		return {
 			player: "visudo20179C",
@@ -92,6 +91,7 @@ export default {
 			legendOptions: [],
 			selectedLegend: null,
 			selectedLegendData: null,
+			levelMessage: null,
 		}
 	},
 	computed: {
@@ -104,6 +104,9 @@ export default {
 			return {
 				width: `${this.responseData.global.toNextLevelPercent}%`
 			}
+		},
+		nextLevelMessage() {
+			return (100 - this.responseData.global.toNextLevelPercent)+"% to next level"
 		},
 	},
 	methods: {
