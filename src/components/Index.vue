@@ -2,12 +2,12 @@
   <div class="bg-black w-full h-screen ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
 	<h1 class="ml-auto mr-auto text-xl w-2/3 mb-5 border rounded-lg border-gray-500">Stats for: {{player}}</h1>
 	<div v-if="responseDataCompute != null" class="bg-black">
-		<h1 class="text-xl">Account Level: {{this.responseData.global.level}}</h1>
-		<div class="h-3 w-3/4 relative max-w-xl mr-auto ml-auto rounded-full overflow-hidden">
-    		<div v-tooltip.top-center="nextLevelMessage" class="w-full h-full bg-black border rounded-lg border-gray-500 absolute"></div>
+		<h1 class="text-xl mb-8">Account Level: {{this.responseData.global.level}}</h1>
+		<div v-tooltip.top-center="nextLevelMessage" class="h-3 w-3/4 relative max-w-xl mr-auto ml-auto rounded-full overflow-hidden">
+    		<div class="w-full h-full bg-black border rounded-lg border-gray-500 absolute"></div>
     		<div class="h-full bg-red-500 absolute" :style="barStyle"></div>
 		</div>
-		<h1 class="text-lg mt-4">{{rankedSplit}}</h1>
+		<h1 class="text-xl mt-6 mb-4 font-black">{{rankedSplit}}</h1>
 		<table class="ml-auto mr-auto table-fixed w-3/4 divide-y divide-gray-200 border border-gray-500">
 			<tr class="border rounded-lg border-gray-500">
 				<th>Rank</th>
@@ -109,7 +109,8 @@ export default {
 			return (100 - this.responseData.global.toNextLevelPercent)+"% to next level"
 		},
 		rankedSplit() {
-			return this.responseData.global.rank.rankedSeason.replaceAll('_', ' ')
+			var rankedSplitString = this.responseData.global.rank.rankedSeason.replaceAll('_', ' ')
+			return rankedSplitString.charAt(0).toUpperCase() + rankedSplitString.slice(1)
 		},
 	},
 	methods: {
