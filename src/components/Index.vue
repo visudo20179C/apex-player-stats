@@ -7,7 +7,7 @@
     		<div v-tooltip.top-center="nextLevelMessage" class="w-full h-full bg-black border rounded-lg border-gray-500 absolute"></div>
     		<div class="h-full bg-red-500 absolute" :style="barStyle"></div>
 		</div>
-		<h1 class="text-lg mt-4">{{this.responseData.global.rank.rankedSeason.replaceAll('_', ' ')}}</h1>
+		<h1 class="text-lg mt-4">{{rankedSplit}}</h1>
 		<table class="ml-auto mr-auto table-fixed w-3/4 divide-y divide-gray-200 border border-gray-500">
 			<tr class="border rounded-lg border-gray-500">
 				<th>Rank</th>
@@ -107,6 +107,9 @@ export default {
 		},
 		nextLevelMessage() {
 			return (100 - this.responseData.global.toNextLevelPercent)+"% to next level"
+		},
+		rankedSplit() {
+			return this.responseData.global.rank.rankedSeason.replaceAll('_', ' ')
 		},
 	},
 	methods: {
