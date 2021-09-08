@@ -7,12 +7,12 @@
   "manifest": {
     "anchor": "panel",
     "assetUrls": [],
-    "authorName": "",
+    "authorName": "visudo",
     "bitsEnabled": false,
     "canInstall": true,
     "configUrl": "https://localhost:8080/config.html",
     "configurationLocation": "none",
-    "description": "",
+    "description": "Tired of having your chat constantly wonder what rank/RP level you are in ranked games? Do you want a quick & simple way to display your Apex Legends account stats on your Twitch page? Built with the help of the mozambiquehe.re API, this extension displays some of your coolest Apex Legends Stats in real-time. These stats include your account level, your level/RP for the current Ranked Split, and your currently equipped legend with their equipped trackers is displayed below. More stats planned to be added in future releases of this extension. All you need is the name of your Origin account handy to get this extension to work. Unfortunately, this extension only has support for PC players at this time.  ",
     "eulaTosUrl": "",
     "hasChatSupport": false,
     "iconUrl": "",
@@ -21,7 +21,7 @@
     "installationCount": -42,
     "liveConfigUrl": "",
     "name": "ApexPlayerStats",
-    "panelHeight": 300,
+    "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
@@ -29,19 +29,19 @@
     "sku": "",
     "state": "Testing",
     "subscriptionsSupportLevel": "none",
-    "summary": "",
-    "supportEmail": "",
+    "summary": "Are you a Content Creator, Streamer, or Pro Player who streams Apex Legends? If so, this extension was made for you.",
+    "supportEmail": "cjkbusiness96@gmail.com",
     "vendorCode": "",
     "version": "0.0.1",
-    "viewerSummary": "",
-    "viewerUrl": "https://localhost:8080/panel.html",
+    "viewerSummary": "This is the apex-player-stats Twitch extension developed by v1sudo. For more information on me, please visit https://visudo20179c.github.io/",
+    "viewerUrl": "https://localhost:8080/index.html",
     "viewerUrls": {
-      "panel": "https://localhost:8080/panel.html"
+      "panel": "https://localhost:8080/index.html"
     },
     "views": {
       "panel": {
-        "viewerUrl": "https://localhost:8080/panel.html",
-        "height": 300,
+        "viewerUrl": "https://localhost:8080/index.html",
+        "height": 500,
         "canLinkExternalContent": false
       },
       "config": {
@@ -53,7 +53,7 @@
     "whitelistedPanelUrls": []
   },
   "frontendCommand": "npm run serve",
-  "frontendFolderName": "F:\\GitHub\\ApexStats\\apex-stats",
+  "frontendFolderName": "\\\\wsl$\\Ubuntu-20.04\\home\\visudo\\git\\apex-player-stats",
   "name": "ApexPlayerStats",
   "usingRandomFrontendHostingPort": false,
   "version": 3
