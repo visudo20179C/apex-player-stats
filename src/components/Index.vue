@@ -88,7 +88,16 @@
 		</div>	
 	</div>
 	<div class="bg-black">
-		<p class="ml-auto mr-auto pt-20 pb-20 text-sm w-2/3 bg-black"><i>This site was made with the help of the mozambiquehe.re API. Visit their site <a href="https://apexlegendsapi.com/" _target="blank" class="text-gray-200">here</a> to learn more about the project and consider donating/becoming a supporter to them on Patreon.</i></p>
+		<p class="ml-auto mr-auto pt-20 text-sm w-2/3 bg-black">
+			<i>This site was made with the help of the mozambiquehe.re API. </i>
+		</p>
+		<p class="ml-auto mr-auto pb-20 text-sm w-2/3 bg-black">
+			<i>Visit their site</i>
+			<a href="https://apexlegendsapi.com/" target="_blank" class="text-gray-200">
+				here
+			</a>
+			<i>to learn more about the project and consider donating/becoming a supporter to them on Patreon.</i>
+		</p>
 	</div>
   </div>
 </template>
