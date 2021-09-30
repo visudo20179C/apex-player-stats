@@ -12,33 +12,38 @@
 		<div>Check the name and spelling and try again.</div>
 	</div>
 	<div v-else>
-		<h1 class="ml-auto mr-auto text-xl w-2/3 mb-5 border rounded-lg border-gray-500">Stats for: {{player}}</h1>
 		<div v-if="responseDataCompute != null" class="bg-black">
-			<h1 class="text-xl mb-8">Account Level: {{this.responseData.global.level}}</h1>
+			<div v-if="this.responseData.realtime.isOnline == 1">
+				<div class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 bg-green-600 text-white">{{player}} is currently Online - {{this.responseData.realtime.currentStateAsText}}</div>
+			</div>
+			<div v-else>
+				<div style="background-color: #a02121;" class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 text-gray-300">{{player}} is currently Offline</div>
+			</div>
+			<h1 class="text-2xl mb-8 font-black">Account Level: {{this.responseData.global.level}}</h1>
 			<div v-tooltip.top-center="nextLevelMessage" class="h-3 w-3/4 relative max-w-xl mr-auto ml-auto rounded-full overflow-hidden">
 				<div class="w-full h-full bg-black border rounded-lg border-gray-500 absolute"></div>
-				<div class="h-full bg-red-500 absolute" :style="barStyle"></div>
+				<div style="background-color: #a02121;" class="h-full absolute" :style="barStyle"></div>
 			</div>
 			<h1 class="text-xl mt-6 mb-4 font-black">{{rankedSplit}}</h1>
-			<table class="ml-auto mr-auto table-fixed w-3/4 divide-y divide-gray-200 border border-gray-500">
-				<tr class="border rounded-lg border-gray-500">
-					<th>Rank</th>
-					<th>Total RP</th>
-					<th>Rank #</th>
+			<table class="table-fixed ml-auto mr-auto w-1/2 border border-gray-500">
+				<tr> 
+					<th class="border rounded-lg border-gray-500">Rank</th>
+					<th class="border rounded-lg border-gray-500">Total RP</th>
+					<th class="border rounded-lg border-gray-500">Rank #</th>
 				</tr>
 				<tr v-if="responseData.global.rank.ladderPosPlatform == -1">
-					<td>{{this.responseData.global.rank.rankName}} {{this.responseData.global.rank.rankDiv}}
+					<td class="border rounded-lg border-gray-500">{{this.responseData.global.rank.rankName}} {{this.responseData.global.rank.rankDiv}}
 						<img class="ml-auto mr-auto max-h-16 max-w-16" :src="this.responseData.global.rank.rankImg"/>
 					</td>
-					<td>{{this.responseData.global.rank.rankScore}}</td>
-					<td>N/A</td>
+					<td class="border rounded-lg border-gray-500">{{this.responseData.global.rank.rankScore}}</td>
+					<td class="border rounded-lg border-gray-500">N/A</td>
 				</tr>
 				<tr v-else>
-					<td>{{this.responseData.global.rank.rankName}}
+					<td class="border rounded-lg border-gray-500">{{this.responseData.global.rank.rankName}}
 						<img class="ml-auto mr-auto max-h-16 max-w-16" :src="this.responseData.global.rank.rankImg"/>
 					</td>
-					<td>{{this.responseData.global.rank.rankScore}}</td>
-					<td># {{this.responseData.global.rank.ladderPosPlatform}}</td>
+					<td class="border rounded-lg border-gray-500">{{this.responseData.global.rank.rankScore}}</td>
+					<td class="border rounded-lg border-gray-500"># {{this.responseData.global.rank.ladderPosPlatform}}</td>
 				</tr>
 			</table>
 			<div class="mt-4 mb-4 max-h-1/2 bg-black">
@@ -47,20 +52,22 @@
 					{{this.responseData.legends.selected.LegendName}}
 				</div>
 				<img class="object-contain ml-auto mr-auto h-48 w-full" :src="this.responseData.legends.selected.ImgAssets.icon"/>
+				<p class="ml-auto mr-auto mb-4 border rounded-lg border-gray-500 w-64"><i>Skin: {{this.responseData.legends.selected.gameInfo.skin}}</i></p>
 				<h1 class="text-xl">Equipped Trackers:</h1>
 				<ul>
 					<div v-for="item in this.responseData.legends.selected.data">
-						<li class="w-2/3 ml-auto mr-auto border border-gray-500">{{item.name}}: {{item.value}}</li>
+						<li class="w-1/2 ml-auto mr-auto border border-gray-500">{{item.name}}: {{item.value}}</li>
 					</div>
 				</ul>
 			</div>
-			<div class="pb-5 bg-black"> 
+			<div class="ml-auto mr-auto pb-5 w-1/2 bg-black"> 
 				<p class="mb-2"> See {{player}}'s trackers for: </p>
 				<t-select
-					placeholder="Select a Legend"
+					placeholder="Select Legend"
 					v-model="selectedLegend"
 					:options="this.legendOptions"
 					@change="showLegendTrackers()"
+					style="color: #B12332;"
 				/>
 			</div>
 			<div v-if="selectedLegend && selectedLegendData" class="bg-black pb-10">
@@ -68,7 +75,7 @@
 				<div v-if="selectedLegendData.data !== undefined">
 					<ul>
 						<div v-for="item in selectedLegendData.data">
-							<li class="w-2/3 ml-auto mr-auto border border-gray-500">{{item.name}}: {{item.value}}</li>
+							<li class="w-1/2 ml-auto mr-auto border border-gray-500">{{item.name}}: {{item.value}}</li>
 						</div>
 					</ul>
 				</div>
@@ -177,5 +184,3 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
