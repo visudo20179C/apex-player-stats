@@ -123,18 +123,18 @@
 			/>
 		</div>	
 	</div>
-	<div class="bg-black ml-auto mr-auto text-sm w-2/3">
+	<div class="bg-black ml-auto mr-auto text-sm">
 		<p class="pt-12">
 			<i>This site was made with the help of the mozambiquehe.re API. </i>
 		</p>
-		<p class="pb-6">
+		<p class="mb-6">
 			<i>Visit their site</i>
 			<a href="https://apexlegendsapi.com/" target="_blank" class="text-gray-200">
 				here
 			</a>
 			<i>to learn more about the project and consider donating/becoming a supporter to them on Patreon.</i>
 		</p>
-		<p class="ml-auto mr-auto pb-20 text-sm w-2/3 bg-black">
+		<p class="bg-black pb-20">
 			<i>To learn more about this project/site specifically, visit the GitHub repository for it</i>
 			<a href="https://github.com/visudo20179C/apex-player-stats" target="_blank" class="text-gray-200">
 				here.
