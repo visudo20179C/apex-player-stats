@@ -1,23 +1,48 @@
 <template>
   <div class="bg-black w-full h-screen ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
-	<div v-if="!hasSearchParams">
-		<div class="mb-4">No name provided in search param</div>
-		<div class="mb-4">Please provide the name of your origin account in the "name" parameter like so:</div>
-		<div class="mb-4">https://apex-stats.visudo.me?name=YOUR_NAME_HERE</div> 
-		<div class="mb-4"> OR </div>
-		<div class="mb-4">https://apex-stats.visudo.me/?name=YOUR_NAME_HERE</div>
+	<div v-if="!hasSearchParams" class="ml-auto mr-auto w-1/2">
+		<div class="mb-4 text-2xl">Apex Player Stats</div>
+		<div class="mb-4">Please provide the platform/name of your account:</div>
+		<t-select
+			placeholder="Select Platform"
+			v-model="selectedPlatform"
+			:options="[{value: 'PC', text: 'PC/Origin'}, {value: 'X1', text: 'Xbox'}, {value: 'PS4', text: 'PSN'}]"
+			style="color: #B12332; margin-bottom: 2em;"
+		/>
+		<t-input
+			placeholder="Enter username"
+			v-model="inputName"
+			style="background-color: black; color: #B12332; margin-bottom: 2em;"
+		/>
+		<button class="w-24 bg-black hover:bg-gray-800 font-bold py-2 px-4 border-2 border-red-900 rounded shadow" @click="search()">Go</button>
 	</div>
-	<div v-else-if="errorMessage != null">
+	<div v-else-if="errorMessage != null" class="ml-auto mr-auto w-1/2">
 		<div class="mb-4">{{this.errorMessage}}</div>
-		<div>Check the name and spelling and try again.</div>
+		<div class="mb-4">Check the name and spelling and try again.</div>
+		<t-select
+			placeholder="Select Platform"
+			v-model="selectedPlatform"
+			:options="[{value: 'PC', text: 'PC/Origin'}, {value: 'X1', text: 'Xbox'}, {value: 'PS4', text: 'PSN'}]"
+			style="color: #B12332; margin-bottom: 2em;"
+		/>
+		<t-input
+			placeholder="Enter username"
+			v-model="inputName"
+			style="background-color: black; color: #B12332; margin-bottom: 2em;"
+		/>
+		<button class="w-24 bg-black hover:bg-gray-800 font-bold py-2 px-4 border-2 border-red-900 rounded shadow" @click="searchAfterError()">Go</button>
 	</div>
 	<div v-else>
 		<div v-if="responseDataCompute != null" class="bg-black">
 			<div v-if="this.responseData.realtime.isOnline == 1">
-				<div class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 bg-green-600 text-white">{{player}} is currently Online - {{this.responseData.realtime.currentStateAsText}}</div>
+				<div class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 bg-green-600 text-white">
+					{{inputName}} is currently Online - {{this.responseData.realtime.currentStateAsText}}
+				</div>
 			</div>
 			<div v-else>
-				<div style="background-color: #a02121;" class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 text-gray-300">{{player}} is currently Offline</div>
+				<div style="background-color: #a02121;" class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 text-gray-300">
+					{{inputName}} is currently Offline
+				</div>
 			</div>
 			<h1 class="text-2xl mb-8 font-black">Account Level: {{this.responseData.global.level}}</h1>
 			<div v-tooltip.top-center="nextLevelMessage" class="h-3 w-3/4 relative max-w-xl mr-auto ml-auto rounded-full overflow-hidden">
@@ -32,7 +57,8 @@
 					<th class="border rounded-lg border-gray-500">Rank #</th>
 				</tr>
 				<tr v-if="responseData.global.rank.ladderPosPlatform == -1">
-					<td class="border rounded-lg border-gray-500">{{this.responseData.global.rank.rankName}} {{this.responseData.global.rank.rankDiv}}
+					<td class="border rounded-lg border-gray-500">
+						{{this.responseData.global.rank.rankName}} {{this.responseData.global.rank.rankDiv}}
 						<img class="ml-auto mr-auto max-h-16 max-w-16" :src="this.responseData.global.rank.rankImg"/>
 					</td>
 					<td class="border rounded-lg border-gray-500">{{this.responseData.global.rank.rankScore}}</td>
@@ -47,12 +73,14 @@
 				</tr>
 			</table>
 			<div class="mt-4 mb-4 max-h-1/2 bg-black">
-				<h1 class="text-xl">{{player}}'s currently selected legend: </h1>
+				<h1 class="text-xl">{{inputName}}'s currently selected legend: </h1>
 				<div class="ml-auto mr-auto mt-5 text-bold text-2xl w-64 h-10 bg-black border rounded-lg border-gray-500">
 					{{this.responseData.legends.selected.LegendName}}
 				</div>
 				<img class="object-contain ml-auto mr-auto h-48 w-full" :src="this.responseData.legends.selected.ImgAssets.icon"/>
-				<p class="ml-auto mr-auto mb-4 border rounded-lg border-gray-500 w-64"><i>Skin: {{this.responseData.legends.selected.gameInfo.skin}}</i></p>
+				<p class="ml-auto mr-auto mb-4 border rounded-lg border-gray-500 w-64">
+					<i>Skin: {{this.responseData.legends.selected.gameInfo.skin}}</i>
+				</p>
 				<h1 class="text-xl">Equipped Trackers:</h1>
 				<ul>
 					<div v-for="item in this.responseData.legends.selected.data">
@@ -61,7 +89,7 @@
 				</ul>
 			</div>
 			<div class="ml-auto mr-auto pb-5 w-1/2 bg-black"> 
-				<p class="mb-2"> See {{player}}'s trackers for: </p>
+				<p class="mb-2"> See {{inputName}}'s trackers for: </p>
 				<t-select
 					placeholder="Select Legend"
 					v-model="selectedLegend"
@@ -83,6 +111,7 @@
 					None Equipped
 				</div>
 			</div>
+			<button class="w-48 mt-10 bg-black hover:bg-gray-800 font-bold py-2 px-4 border-2 border-red-900 rounded shadow" @click="newSearch()">Search Again</button>
 		</div>
 		<div v-else>
 			<div class="text-lg">Loading... Please Wait... </div>
@@ -94,16 +123,22 @@
 			/>
 		</div>	
 	</div>
-	<div class="bg-black">
-		<p class="ml-auto mr-auto pt-20 text-sm w-2/3 bg-black">
+	<div class="bg-black ml-auto mr-auto text-sm w-2/3">
+		<p class="pt-12">
 			<i>This site was made with the help of the mozambiquehe.re API. </i>
 		</p>
-		<p class="ml-auto mr-auto pb-20 text-sm w-2/3 bg-black">
+		<p class="pb-6">
 			<i>Visit their site</i>
 			<a href="https://apexlegendsapi.com/" target="_blank" class="text-gray-200">
 				here
 			</a>
 			<i>to learn more about the project and consider donating/becoming a supporter to them on Patreon.</i>
+		</p>
+		<p class="ml-auto mr-auto pb-20 text-sm w-2/3 bg-black">
+			<i>To learn more about this project/site specifically, visit the GitHub repository for it</i>
+			<a href="https://github.com/visudo20179C/apex-player-stats" target="_blank" class="text-gray-200">
+				here.
+			</a>
 		</p>
 	</div>
   </div>
@@ -118,11 +153,12 @@ export default {
 	components: {HalfCircleSpinner, VTooltip},
 	data() {
 		return {
-			player: null,
 			responseData: null,
 			legendOptions: [],
 			selectedLegend: null,
 			selectedLegendData: null,
+			selectedPlatform: null,
+			inputName: null,
 			levelMessage: null,
 			errorMessage: null,
 			hasSearchParams: false, 
@@ -164,22 +200,44 @@ export default {
 		},
 		showLegendTrackers() {
 			this.selectedLegendData = this.responseData.legends.all[this.selectedLegend]
-		}
-	},
-	created() {
-		let params = new URLSearchParams(document.location.search.substring(1))
-		if(params.get("name") != null) {
-			this.player = params.get("name")
+		},
+		search() {
+			var player = this.inputName
+			var platform = this.selectedPlatform
 			this.hasSearchParams = true
 			fetch(
-				"https://api.mozambiquehe.re/bridge?version=5&platform=PC&player="+this.player+"&auth=QYMCCkwuWGEeBQFL30tT",
+				"https://api.mozambiquehe.re/bridge?version=5&platform="+platform+"&player="+player+"&auth=QYMCCkwuWGEeBQFL30tT",
 				{
 					method: 'GET',
 				}
 			)
 			.then(response => response.json())
 			.then(data => this.processData(data))
+		},
+		searchAfterError() {
+			this.errorMessage = null
+			var player = this.inputName
+			var platform = this.selectedPlatform
+			this.hasSearchParams = true
+			fetch(
+				"https://api.mozambiquehe.re/bridge?version=5&platform="+platform+"&player="+player+"&auth=QYMCCkwuWGEeBQFL30tT",
+				{
+					method: 'GET',
+				}
+			)
+			.then(response => response.json())
+			.then(data => this.processData(data))
+		},
+		newSearch() {
+			this.hasSearchParams = false
+			this.responseData = null
+			this.inputName = null
+			this.selectedPlatform = null
+			this.legendOptions = []
+			this.errorMessage = null
 		}
+	},
+	created() {
 	},
 }
 </script>
