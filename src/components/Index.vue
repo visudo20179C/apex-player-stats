@@ -237,8 +237,6 @@ export default {
 			this.errorMessage = null
 		}
 	},
-	created() {
-	},
 }
 </script>
 

@@ -11,15 +11,6 @@ This project makes use of the mozambiquehe.re API. Visit their project page [her
 
 There is a live version of this project running [here](https://apex-stats.visudo.me/).
 
-In order to use it, you must pass your Origin ID as a "name" parameter in the URI like so:
-
-```
-https://apex-stats.visudo.me/?name=visudo20179C
-or
-https://apex-stats.visudo.me?name=visudo20179C
-```
-
-
 # Development Instructions
 
 ## Project setup
