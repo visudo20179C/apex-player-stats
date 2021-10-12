@@ -1,5 +1,8 @@
 # Apex Stats Page
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/visudo20179C/apex-player-stats.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/visudo20179C/apex-player-stats/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/visudo20179C/apex-player-stats.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/visudo20179C/apex-player-stats/context:javascript)
+
 ## A single-page application to display user stats for the game Apex Legends
 
 This is a personal project. This implementation was written in the VueJS framework. For styling, I'm using TailwindCSS.
