@@ -1,13 +1,7 @@
 import {
-    TAlert,
-    TButton, TCard,
-    TCheckbox, TDatepicker, TDialog, TDropdown,
     TInput,
-    TInputGroup, TModal, TPagination,
-    TRadio,
-    TRichSelect,
-    TSelect, TTable, TTag,
-    TTextarea, TToggle
+    TSelect,
+    TTextarea,
 } from "vue-tailwind/dist/components";
 
 const settings = {
