@@ -1,8 +1,7 @@
 <template>
-  <div class="bg-black w-full h-screen ml-auto mr-auto pt-10 font-mono" style="color: #B12322;">
+  <div class="bg-black w-full h-full ml-auto mr-auto pt-10 mb-48 font-mono" style="color: #B12322;">
 	<div v-if="!hasSearchParams" class="ml-auto mr-auto w-1/2">
-		<div class="mb-4 text-2xl">Apex Player Stats</div>
-		<div class="mb-4">Please provide the platform/name of your account:</div>
+		<div class="mb-4 mt-10 text-xl font-bold">Please provide the platform & name of your account:</div>
 		<t-select
 			placeholder="Select Platform"
 			v-model="selectedPlatform"
@@ -40,7 +39,7 @@
 				</div>
 			</div>
 			<div v-else>
-				<div style="background-color: #a02121;" class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 text-gray-300">
+				<div style="background-color: black;" class="ml-auto mr-auto mb-4 w-2/3 border rounded-lg border-gray-500 text-red-7">
 					{{inputName}} is currently Offline
 				</div>
 			</div>
@@ -114,7 +113,7 @@
 			<button class="w-48 mt-10 bg-black hover:bg-gray-800 font-bold py-2 px-4 border-2 border-red-900 rounded shadow" @click="newSearch()">Search Again</button>
 		</div>
 		<div v-else>
-			<div class="text-lg">Loading... Please Wait... </div>
+			<div class="text-2xl mb-10">Loading... Please Wait... </div>
 			<half-circle-spinner
 			  :animation-duration="1000"
 			  :size="100"
@@ -122,24 +121,6 @@
 			  class="m-auto"
 			/>
 		</div>	
-	</div>
-	<div class="bg-black ml-auto mr-auto text-sm">
-		<p class="pt-12">
-			<i>This site was made with the help of the mozambiquehe.re API. </i>
-		</p>
-		<p class="mb-6">
-			<i>Visit their site</i>
-			<a href="https://apexlegendsapi.com/" target="_blank" class="text-gray-200">
-				here
-			</a>
-			<i>to learn more about the project and consider donating/becoming a supporter to them on Patreon.</i>
-		</p>
-		<p class="bg-black pb-20">
-			<i>To learn more about this project/site specifically, visit the GitHub repository for it</i>
-			<a href="https://github.com/visudo20179C/apex-player-stats" target="_blank" class="text-gray-200">
-				here.
-			</a>
-		</p>
 	</div>
   </div>
 </template>
@@ -234,6 +215,7 @@ export default {
 			this.inputName = null
 			this.selectedPlatform = null
 			this.legendOptions = []
+			this.selectedLegend = null
 			this.errorMessage = null
 		}
 	},

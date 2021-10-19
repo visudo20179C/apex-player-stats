@@ -1,16 +1,22 @@
 <template>
   <div id="app">
+	<Header/>
 	<Index/>
+	<Footer/>
   </div>
 </template>
 
 <script>
 import Index from './components/Index.vue'
+import Header from './components/Header.vue' 
+import Footer from './components/Footer.vue' 
 
 export default {
   name: 'App',
   components: {
     Index,
+	Header,
+	Footer
   }
 }
 </script>
@@ -22,5 +28,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: black;
 }
 </style>
