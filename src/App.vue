@@ -1,20 +1,20 @@
 <template>
   <div id="app">
 	<Header/>
-	<Index/>
+	<Content/>
 	<Footer/>
   </div>
 </template>
 
 <script>
-import Index from './components/Index.vue'
+import Content from './components/Content.vue'
 import Header from './components/Header.vue' 
 import Footer from './components/Footer.vue' 
 
 export default {
   name: 'App',
   components: {
-    Index,
+    Content,
 	Header,
 	Footer
   }

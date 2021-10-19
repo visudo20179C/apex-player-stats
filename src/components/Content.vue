@@ -130,7 +130,7 @@ import { HalfCircleSpinner } from 'epic-spinners'
 import { VTooltip } from 'v-tooltip'
 
 export default {
-  	name: 'Index',
+  	name: 'Content',
 	components: {HalfCircleSpinner, VTooltip},
 	data() {
 		return {
