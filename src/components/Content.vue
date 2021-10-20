@@ -127,11 +127,10 @@
 
 <script>
 import { HalfCircleSpinner } from 'epic-spinners'
-import { VTooltip } from 'v-tooltip'
 
 export default {
   	name: 'Content',
-	components: {HalfCircleSpinner, VTooltip},
+	components: {HalfCircleSpinner},
 	data() {
 		return {
 			responseData: null,
