@@ -1,7 +1,7 @@
 <template>
   <div class="bg-black w-full h-full ml-auto mr-auto pt-10 mb-48 font-mono" style="color: #B12322;">
 	<div v-if="!hasSearchParams" class="ml-auto mr-auto w-1/2">
-		<div class="mb-4 mt-10 text-xl font-bold">Please provide the platform & name of your account:</div>
+		<div class="mb-4 mt-10 text-xl font-bold">Please provide the platform &amp; name of your account:</div>
 		<t-select
 			placeholder="Select Platform"
 			v-model="selectedPlatform"
