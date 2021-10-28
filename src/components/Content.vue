@@ -142,6 +142,7 @@ export default {
 			levelMessage: null,
 			errorMessage: null,
 			hasSearchParams: false, 
+			apiKey: process.env.VUE_APP_MOZAMRE_API_TOKEN,
 		}
 	},
 	computed: {
