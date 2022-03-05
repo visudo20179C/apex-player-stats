@@ -5,7 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "preinstall": "npx npm-force-resolutions@0.0.3"
+  },
+  "resolutions": {
+	"ansi-regex": "5.0.1",
+	"postcss": "7.0.36"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.3.3",
@@ -21,15 +26,15 @@
   },
   "devDependencies": {
     "@vue/babel-preset-app": "^4.5.13",
-    "@vue/cli-plugin-babel": "^4.5.13",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^5.0.1",
+    "@vue/cli-service": "^5.0.1",
+    "ansi-regex": ">=5.0.1",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11",
-	"json-schema": ">=0.4.0",
-	"ansi-regex": ">=5.0.1",
-	"nth-check": ">=2.0.1"
+    "eslint": "^8.10.0",
+    "eslint-plugin-vue": "^8.5.0",
+    "json-schema": ">=0.4.0",
+    "nth-check": ">=2.0.1",
+    "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
